@@ -63,20 +63,20 @@ This is the default state of the robot. It simulates normal operation where the 
 Unlike a standard `time.sleep()` blink, this state uses timestamps to blink the LED while still listening for button inputs.
 
 * **`enter()`**:
-* Logs the state change.
-* Initializes `self.pixel_state` (boolean) to track if the LED is on or off.
-* Captures `self.start_time` using `time.monotonic()` to begin the blink timer.
+  * Logs the state change.
+  * Initializes `self.pixel_state` (boolean) to track if the LED is on or off.
+  * Captures `self.start_time` using `time.monotonic()` to begin the blink timer.
 
 
 * **`update()`**:
-* Checks if **0.5 seconds** have passed since the last toggle.
-* If yes: Toggles the LED (Green ON/OFF) and resets the timestamp.
-* *Visual Output:* Blinking Green.
+  * Checks if **0.5 seconds** have passed since the last toggle.
+  * If yes: Toggles the LED (Green ON/OFF) and resets the timestamp.
+  * *Visual Output:* Blinking Green.
 
 
 * **`on_event(event)`**:
-* Listens for the button to be **released**.
-* **Action:** Transitions the machine to the `Avoiding` state.
+  * Listens for the button to be **released**.
+  * **Action:** Transitions the machine to the `Avoiding` state.
 
 
 
