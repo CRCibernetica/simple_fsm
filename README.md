@@ -1,4 +1,4 @@
-# CircuitPython Finite State Machine Documentation
+# CircuitPython Finite State Machine
 
 This document describes the implementation of a non-blocking robot behavior controller using a custom `simple_fsm` library. The example code manages two distinct behaviors: **Moving Forward** (with a status light blink) and **Avoiding** (a timed wait state).
 
