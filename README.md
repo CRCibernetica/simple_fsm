@@ -30,12 +30,10 @@ self.machine.transition_to(NewState(self.machine))
 
 ## 2. Hardware Configuration
 
-The code interacts with the **CRCibernetica IdeaBoard** hardware platform.
+The code works with the **CRCibernetica IdeaBoard**
 
 * **RGB LED:** Accessed via `ib.pixel`. Used to visually indicate the current state and activity.
-* **Input Button:** Connected to `board.IO0`. This is the **BOOT** button.
-* **Event:** The code listens specifically for `event.released` (when the button is pressend and then let go).
-
+* **BOOT Button:** Connected to `board.IO0`. Press and release the button to transition to the Avoiding state.
 
 
 ---
@@ -119,9 +117,3 @@ The `while True:` loop is the engine that drives the non-blocking logic.
 3. **Continuous Updates:**
 * `robot_fsm.update()` is called every cycle.
 * This drives the blinking logic in `MovingForward` and the timer logic in `Avoiding`.
-
-
-
-### Why this is efficient
-
-Because there are no `time.sleep()` calls in the loop, the microcontroller can process thousands of cycles per second, ensuring the LED blinking is smooth and the button inputs are never missed.
