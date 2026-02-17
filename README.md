@@ -1,6 +1,6 @@
 # CircuitPython Finite State Machine Documentation
 
-This document describes the implementation of a non-blocking robot behavior controller using a custom `simple_fsm` library. The code manages two distinct behaviors: **Moving Forward** (with a status light blink) and **Avoiding** (a timed wait state).
+This document describes the implementation of a non-blocking robot behavior controller using a custom `simple_fsm` library. The example code manages two distinct behaviors: **Moving Forward** (with a status light blink) and **Avoiding** (a timed wait state).
 
 ## 1. The `simple_fsm.py` Library Guide
 
@@ -30,13 +30,11 @@ self.machine.transition_to(NewState(self.machine))
 
 ## 2. Hardware Configuration
 
-The code interacts with the **IdeaBoard** hardware platform.
+The code interacts with the **CRCibernetica IdeaBoard** hardware platform.
 
 * **RGB LED:** Accessed via `ib.pixel`. Used to visually indicate the current state and activity.
-* **Input Button:** Connected to `board.IO0`.
-* **Pull:** `Pull.UP` (Internal pull-up resistor enabled).
-* **Logic:** `value_when_pressed=False` (Active Low).
-* **Event:** The code listens specifically for `event.released` (when the button is let go).
+* **Input Button:** Connected to `board.IO0`. This is the **BOOT** button.
+* **Event:** The code listens specifically for `event.released` (when the button is pressend and then let go).
 
 
 
@@ -55,7 +53,7 @@ graph LR
 
 ---
 
-## 4. Class Descriptions
+## 4. Class Descriptions (for test_fsm.py example code)
 
 ### Class: `MovingForward(State)`
 
@@ -90,19 +88,19 @@ This state represents a reaction to an obstacle. It pauses normal operation for 
 The robot waits for 2 seconds, but the main loop continues running. This ensures the robot remains responsive (e.g., if you added an emergency stop button, it would still work during this wait).
 
 * **`enter()`**:
-* Logs the state change.
-* Sets the LED to **Solid Blue** (indicating an obstacle/wait).
-* Captures `self.start_time` to track the duration of the avoidance maneuver.
+  * Logs the state change.
+  * Sets the LED to **Solid Blue** (indicating an obstacle/wait).
+  * Captures `self.start_time` to track the duration of the avoidance maneuver.
 
 
 * **`update()`**:
-* Continuously calculates `current_time - self.start_time`.
-* Checks if the difference is greater than **2.0 seconds**.
-* **Action:** If time is up, it transitions back to `MovingForward`.
+  * Continuously calculates `current_time - self.start_time`.
+  * Checks if the difference is greater than **2.0 seconds**.
+  * **Action:** If time is up, it transitions back to `MovingForward`.
 
 
 * **`on_event(event)`**:
-* *None defined.* Button presses are ignored during the avoidance maneuver.
+  * *None defined.* Button presses are ignored during the avoidance maneuver.
 
 
 
