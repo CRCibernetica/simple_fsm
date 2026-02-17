@@ -10,8 +10,6 @@ The `simple_fsm` library provides a lightweight framework for managing state tra
 
 Install `simple_fsm.py` and `test_fsm.py` in the root directory.
 
-Run `test_fsm.py`
-
 1. **Define States:** Create a new class for every distinct behavior (e.g., `Idle`, `Run`, `Error`) inheriting from `State`.
 2. **Override Methods:** Inside your state classes, override the following methods to define behavior:
 * `enter(self)`: Runs **once** when the state starts. Use this for setup (turning on lights, resetting timers).
